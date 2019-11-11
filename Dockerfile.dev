@@ -1,0 +1,28 @@
+#1.
+FROM node:12-alpine
+
+#2.Create app directory
+RUN mkdir -p /myapp
+
+#3. set entrypoint of app
+WORKDIR /myapp
+
+#4. (prepare dependency)
+COPY package*.json ./
+
+#5. (setup from package.json)
+RUN npm install
+# RUN npm ci --only=production
+
+#6. Bundle app source
+COPY . .
+
+#7. (server port)
+EXPOSE 3000
+
+#8. (serve!)
+CMD [ "npm", "run", "dev" ]
+# CMD [ "node", "index.js" ]
+
+# docker build -t phu/nodejs/test/login1 .
+# docker run --name phu-nodejs-login -d -p 6002:3000 phu/nodejs/test/login1 
