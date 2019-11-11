@@ -1,15 +1,22 @@
-// check env
+// Begin: check env
 if (process.env.NODE_ENV !== 'production') {
     // if not production build then use config from .env file
     require('dotenv').config() 
 }
+// for test only ---------------------------------------------
+// using dotenv load .env file and get var from process.env.*
+console.log(process.env.SESSION_SECRET);
+if (!process.env.SESSION_SECRET) {
+    process.env.SESSION_SECRET = "test" // fix for test only
+}
+// -----------------------------------------------------------
 
 // 0. load require dependencies
 const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
 const passport = require('passport')
-const flash = require('express-flash')
+const flash = require('express-flash') // unused: for store and send msg
 const session = require('express-session') 
 const methodOverride = require('method-override')
 
@@ -104,5 +111,5 @@ function checkAlreadyAuthen(req, res, next) {
     next();
 }
 
-// final: start server listener
+// Final: start server listener
 app.listen(3000)

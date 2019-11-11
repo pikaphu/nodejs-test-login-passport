@@ -10,19 +10,26 @@ WORKDIR /myapp
 #4. (prepare dependency)
 COPY package*.json ./
 
-#5. (setup from package.json)
+#5. !? npm-bcrypt require node-pre-gyp and require python !?
+RUN apk --no-cache add --virtual native-deps \
+  g++ gcc libgcc libstdc++ linux-headers make python && \
+  npm install --quiet node-gyp -g &&\
+  npm install --quiet && \
+  apk del native-deps
+
+#6. (setup from package.json)
 RUN npm install
 # RUN npm ci --only=production
 
-#6. Bundle app source
+#7. Bundle app source
 COPY . .
 
-#7. (server port)
+#8. (server port)
 EXPOSE 3000
 
-#8. (serve!)
+#9. (serve!)
 CMD [ "npm", "run", "dev" ]
 # CMD [ "node", "index.js" ]
 
-# docker build -t phu/nodejs/test/login1 .
+# docker build -f Dockerfile.dev -t phu/nodejs/test/login1 .
 # docker run --name phu-nodejs-login -d -p 6002:3000 phu/nodejs/test/login1 

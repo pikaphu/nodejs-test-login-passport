@@ -1,2 +1,2 @@
-.env
+#.env # beware using this file on production
 node_modules
