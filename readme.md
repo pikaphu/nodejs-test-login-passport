@@ -18,3 +18,4 @@ Ref. (Thanks to these resources):
 1. <https://www.youtube.com/watch?v=-RCnNyD0L-s>  
 2. <http://www.passportjs.org/>
 3. <https://www.youtube.com/watch?v=Ud5xKCYQTjM>
+4. <https://www.freecodecamp.org/news/learn-how-to-handle-authentication-with-node-using-passport-js-4a56ed18e81e/>
